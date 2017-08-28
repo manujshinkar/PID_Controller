@@ -15,6 +15,7 @@ I stands to the integral term which acts on the accumulated sum of the quantity 
 
 ### Tuning PID Components
 
+I tuned the PID components manually. I first designed a PD controller only. First I tried to tune the P only component to get the car to move in the straing line. I set it to 1 but it was to much. The car became very unstable. Then I reduced it to 0.1 which was good for straight path but the car was getting out of the lane at the turns. So I introduced D component and started it with 0.1, same as the P component. But it was not enough. I keep increasing it and finally saw good results at D = 1.5. My final good D value was 2.5 but it worked similarly in between. The car was driving nicely with the PD controller itself but wasn't converging properly on the turns. So I introduced the I component. I stared with 0.1 as initial guess but it was too much and the car became unstable. Finally I found a good result when I was set to 0.0002. The car drove smoothly throughout the track but I feel the car was late into making the turns. This could be fixed if one could see further ahead into the track.
 
 ## Dependencies
 
