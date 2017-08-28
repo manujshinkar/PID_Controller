@@ -1,7 +1,21 @@
-# CarND-Controls-PID
-Self-Driving Car Engineer Nanodegree Program
-
+# PID Controller Project
 ---
+
+## Introduction
+
+The purpose of this project is to build a lane keeping feature for a simulated car using PID controller. The cross track error is minimised by using PID controller. 
+
+## PID Components
+
+P stands for the proportional term which is acts on the direct quantity to be minimised. In this project I tried to minimise the cross track error which is the distance from the center of the lane to the car. The p component is multiplied with the CTE which means we will steer proportional to the CTE based on the P component.
+
+D stands for the differential term which acts on the difference of the consecutive values of the quantity to be minimised. In the project the D component tried to minimise the consecutive cross track errors. This helps to smoothly reach the center line because the P component is direct and might cause the car to oscillate.
+
+I stands to the integral term which acts on the accumulated sum of the quantity to be minimised. In this project the I component tried to minimise the sum of the cross track error. I component works on the steering drift or the systematic bias of the car. This helps to reach the center line correctly.
+
+### Tuning PID Components
+
+I tuned the PID components manually. I first designed a PD controller only. First I tried to tune the P only component to get the car to move in the straing line. I set it to 1 but it was to much. The car became very unstable. Then I reduced it to 0.1 which was good for straight path but the car was getting out of the lane at the turns. So I introduced D component and started it with 0.1, same as the P component. But it was not enough. I keep increasing it and finally saw good results at D = 1.5. My final good D value was 2.5 but it worked similarly in between. The car was driving nicely with the PD controller itself but wasn't converging properly on the turns. So I introduced the I component. I stared with 0.1 as initial guess but it was too much and the car became unstable. Finally I found a good result when I was set to 0.0002. The car drove smoothly throughout the track but I feel the car was late into making the turns. This could be fixed if one could see further ahead into the track.
 
 ## Dependencies
 
@@ -35,58 +49,3 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 3. Compile: `cmake .. && make`
 4. Run it: `./pid`. 
 
-## Editor Settings
-
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
-
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
-
-## Code Style
-
-Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
-
-## Project Instructions and Rubric
-
-Note: regardless of the changes you make, your project must be buildable using
-cmake and make!
-
-More information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/f1820894-8322-4bb3-81aa-b26b3c6dcbaf/lessons/e8235395-22dd-4b87-88e0-d108c5e5bbf4/concepts/6a4d8d42-6a04-4aa6-b284-1697c0fd6562)
-for instructions and the project rubric.
-
-## Hints!
-
-* You don't have to follow this directory structure, but if you do, your work
-  will span all of the .cpp files here. Keep an eye out for TODOs.
-
-## Call for IDE Profiles Pull Requests
-
-Help your fellow students!
-
-We decided to create Makefiles with cmake to keep this project as platform
-agnostic as possible. Similarly, we omitted IDE profiles in order to we ensure
-that students don't feel pressured to use one IDE or another.
-
-However! I'd love to help people get up and running with their IDEs of choice.
-If you've created a profile for an IDE that you think other students would
-appreciate, we'd love to have you add the requisite profile files and
-instructions to ide_profiles/. For example if you wanted to add a VS Code
-profile, you'd add:
-
-* /ide_profiles/vscode/.vscode
-* /ide_profiles/vscode/README.md
-
-The README should explain what the profile does, how to take advantage of it,
-and how to install it.
-
-Frankly, I've never been involved in a project with multiple IDE profiles
-before. I believe the best way to handle this would be to keep them out of the
-repo root to avoid clutter. My expectation is that most profiles will include
-instructions to copy files to a new location to get picked up by the IDE, but
-that's just a guess.
-
-One last note here: regardless of the IDE used, every submitted project must
-still be compilable with cmake and make./
