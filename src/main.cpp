@@ -35,7 +35,7 @@ int main()
   PID pid;
   // TODO: Initialize the pid variable.
   double p = 0.1;
-  double i = 0.0001;
+  double i = 0.0002;
   double d = 2.5;
   std::cout<<"P: "<<p<<" I: "<<i<<" D: "<<d<<std::endl;
   pid.Init(p,i,d);//0.5, 0, 2
